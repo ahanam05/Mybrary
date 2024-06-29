@@ -7,6 +7,7 @@ const app = express();
 const expressLayouts = require("express-ejs-layouts");
 
 const indexRouter = require('./routes/index'); //. means relative to current path
+const authorRouter = require('./routes/authors');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views'); //tells us where the views are available
@@ -21,6 +22,7 @@ db.on('error', error => console.error(error)); //displays error if any
 db.on('open', () => console.log('Connected to Mongoose')); //confirms connection to mongoose
 
 app.use('/', indexRouter); //mounted at the very root of the site
+app.use('/authors', authorRouter);
 
 app.listen(process.env.PORT || 3001);
 
