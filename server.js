@@ -43,7 +43,7 @@ db.on('open', () => console.log('Connected to Mongoose')); //confirms connection
 
 app.use('/', indexRouter); //mounted at the very root of the site
 app.use('/authors', authorRouter);
-app.use(bodyParser.urlencoded({limit: '10mb'}, {extended : false}));
+app.use(bodyParser.urlencoded({extended : true}));
 
 app.listen(process.env.PORT || 3001);
 
