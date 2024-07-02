@@ -1,5 +1,6 @@
 <h2> New Author </h2>
 <form action="/authors" method="POST">
-    <a href="/authors"> Cancel </a> <!--takes to the main authors page-->
+    <%- include('_form_fields') %>
+    <a href="/authors"> Cancel</a> <!--takes to the main authors page-->
     <button type = "submit"> Create </button> <!--creates new author using post method -->
 </form>
