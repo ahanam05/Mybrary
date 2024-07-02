@@ -1,17 +1,19 @@
-const { connect } = require("http2");
-require('dotenv').config();
+/*const { connect } = require("http2");*/
+require('dotenv').config(); //for mongodb
 
-/*if(process.env.NODE_ENV !== 'production'){
+if(process.env.NODE_ENV !== 'production'){
     require('dotenv').config();
-} -- SHOULD BE UNCOMMMENTED BUT??*/
+} 
 
 const express = require("express");
 const app = express();
 const expressLayouts = require("express-ejs-layouts");
 
+const bodyParser = require('body-parser'); //bodyParser must be used before defining routes
+app.use(bodyParser.urlencoded({extended : true}));
+
 const indexRouter = require('./routes/index'); //. means relative to current path
 const authorRouter = require('./routes/authors');
-const bodyParser = require('body-parser');
 
 app.set('view engine', 'ejs');
 app.set('views', __dirname + '/views'); //tells us where the views are available
@@ -43,8 +45,10 @@ db.on('open', () => console.log('Connected to Mongoose')); //confirms connection
 
 app.use('/', indexRouter); //mounted at the very root of the site
 app.use('/authors', authorRouter);
-app.use(bodyParser.urlencoded({extended : true}));
 
-app.listen(process.env.PORT || 3001);
+
+app.listen(process.env.PORT || 3001, () => {
+    console.log(`Server running on port ${process.env.PORT}`);
+});
 
 //https://mybrary-31tz.onrender.com
